@@ -623,21 +623,27 @@ main {
 }
 .slot-item {
   height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 0 12px;
-  color: var(--ink);
-  text-align: center;
-  line-height: 1.15;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: grid;
+  place-items: center;
+  padding: 4px 10px;
   width: 100%;
   box-sizing: border-box;
+}
+.slot-item-text {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 .slot-foot {
   margin-top: 16px;
@@ -648,12 +654,13 @@ main {
 }
 @media (max-width: 700px) {
   .slot-window { width: 150px; }
-  .slot-item { font-size: 13px; }
+  .slot-item-text { font-size: 12.5px; }
 }
 @media (max-width: 540px) {
   .slot-reels { gap: 8px; }
   .slot-window { width: 130px; }
   .slot-col-label { font-size: 9px; }
+  .slot-item-text { font-size: 12px; line-height: 1.15; }
 }
 
 /* ========== SELF-MARK GUIDE BOX ========== */
@@ -3985,7 +3992,7 @@ function runSlotMachine(target) {
           <div class="slot-col-label">${escapeHtml(r.label)}</div>
           <div class="slot-window">
             <div class="slot-strip" id="slotStrip${i}">
-              ${items.map(v => `<div class="slot-item">${escapeHtml(v)}</div>`).join('')}
+              ${items.map(v => `<div class="slot-item"><span class="slot-item-text">${escapeHtml(v)}</span></div>`).join('')}
             </div>
           </div>
         </div>`;
